@@ -1,0 +1,97 @@
+.comment {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.profile__avatar{
+  width: 3rem; 
+  height: 3rem;
+  border-radius: 8px; 
+  
+}
+
+.comment__box{
+  flex: 1;
+}
+
+.comment__box__footer {
+  margin-top: 1rem;
+
+}
+
+.btn__like{
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  padding: 0.5rem;
+}
+
+.btn__like:hover{
+  color: var(--green-500);
+}
+
+.btn__like svg {
+  margin-right: 0.5rem;
+}
+
+.btn__like span::before{
+  content: "\2022";
+  padding: 0 0.25rem;
+}
+
+.comment__content{
+  padding: 1rem;
+  background-color: var(--gray-700);
+  border-radius: 8px;
+}
+
+.comment__content p{
+  margin-top: 1rem;
+  color: var(--gray-300);
+}
+
+.comment__content_header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.comment__content_header button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  color: var(--gray-400);
+  cursor: pointer;
+  line-height: 0;
+  border-radius: 2px;
+}
+
+.comment__content_header button:hover {
+  color: var(--red-500);
+}
+
+.comment__content_profile{
+  display: flex;
+  flex-direction: column;
+}
+
+.comment__content_profile strong {
+  display: block;
+  line-height: 1.6;
+  font-size: 0.875rem;
+  color: var(--white);
+}
+
+.comment__content_profile span {
+  line-height: 1.6;
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  display: block;
+}
