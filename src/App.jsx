@@ -1,12 +1,13 @@
 import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
+import { Sidebar } from "./components/Sidebar";
 
 const App = () => {
   return (
     <>
       <Header />
       <Layout>
-        <aside>sidebar</aside>
+        <Sidebar />
 
         <div>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi qui
