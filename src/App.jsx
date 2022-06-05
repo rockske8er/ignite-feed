@@ -1,5 +1,6 @@
 import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
+import { Post } from "./components/Post";
 import { Sidebar } from "./components/Sidebar";
 
 const App = () => {
@@ -10,10 +11,8 @@ const App = () => {
         <Sidebar />
 
         <div>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi qui
-          porro consequuntur eaque. Fugiat, modi temporibus. Tempora atque
-          nesciunt reprehenderit fuga, nemo impedit. Minus consequatur ipsum
-          ducimus, eligendi neque ut.
+          <Post />
+          <Post />
         </div>
       </Layout>
     </>
