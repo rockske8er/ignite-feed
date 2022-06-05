@@ -1,3 +1,4 @@
+import { Avatar } from "../Avatar";
 import { Comment } from "./../Comment";
 import s from "./styles.module.css";
 
@@ -6,11 +7,8 @@ const Post = () => {
     <article className={s.post}>
       <header className={s.post__header}>
         <div className={s.post__profile}>
-          <img
-            className={s.profile__avatar}
-            src="https://github.com/markus90souza.png"
-            alt=""
-          />
+          <Avatar hasBorder src="https://github.com/markus90souza.png" />
+
           <div className={s.profile__info}>
             <strong>Marcos de Souza</strong>
             <span>UI Developwe</span>

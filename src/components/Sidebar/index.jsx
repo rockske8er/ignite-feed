@@ -1,4 +1,5 @@
 import { PencilLine } from "phosphor-react";
+import { Avatar } from "../Avatar";
 import s from "./styles.module.css";
 
 const Sidebar = () => {
@@ -10,11 +11,8 @@ const Sidebar = () => {
       />
 
       <div className={s.sidebar__profile}>
-        <img
-          className={s.avatar}
-          src="https://github.com/markus90souza.png"
-          alt=""
-        />
+        <Avatar hasBorder src="https://github.com/markus90souza.png" />
+
         <strong className={s.username}>Marcos de Souza</strong>
         <span className={s.desc}>React Native Developer</span>
       </div>
