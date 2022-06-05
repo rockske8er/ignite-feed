@@ -17,6 +17,25 @@
   --green-500: #00875f;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-900);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--gray-600);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-500);
+}
+
 body {
   background-color: var(--gray-900);
   color: var(--gray-300);
