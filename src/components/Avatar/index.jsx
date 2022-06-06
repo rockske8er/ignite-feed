@@ -1,11 +1,8 @@
 import s from "./styles.module.css";
 
-const Avatar = (props) => {
+const Avatar = ({ hasBorder = false, src }) => {
   return (
-    <img
-      className={props.hasBorder ? s.avatar_with_border : s.avatar}
-      src={props.src}
-    />
+    <img className={hasBorder ? s.avatar_with_border : s.avatar} src={src} />
   );
 };
 
