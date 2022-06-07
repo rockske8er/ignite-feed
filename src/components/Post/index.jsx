@@ -1,34 +1,75 @@
+import { format, formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+import { useState } from "react";
 import { Avatar } from "../Avatar";
 import { Comment } from "./../Comment";
 import s from "./styles.module.css";
 
-const Post = () => {
+const Post = ({ author, publishedAt, content }) => {
+  const [comments, setComments] = useState([]);
+
+  const [comment, setComment] = useState("");
+  const publishedAtFormatted = format(
+    publishedAt,
+    "dd 'de' LLLL 'ás' HH:mm'h'",
+    {
+      locale: ptBR,
+    }
+  );
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
+
+  const handleCreateNewComment = () => {
+    event.preventDefault();
+    setComments([...comments, comment]);
+    setComment("");
+  };
+
+  const handleDeleteComment = (commentToDelete) => {
+    const commentsWithouToDeleteOne = comments.filter((comment) => {
+      return comment !== commentToDelete;
+    });
+
+    setComments(commentsWithouToDeleteOne);
+  };
+
+  const handleCommentInvalid = () => {
+    event.target.setCustomValidity("Esse campo e obrigátorio");
+  };
+
   return (
     <article className={s.post}>
       <header className={s.post__header}>
         <div className={s.post__profile}>
-          <Avatar hasBorder src="https://github.com/markus90souza.png" />
+          <Avatar hasBorder src={author.avatar_url} />
 
           <div className={s.profile__info}>
-            <strong>Marcos de Souza</strong>
-            <span>UI Developwe</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
-        <time title="06 de junho" dateTime="2022-06-94">
-          Publicado há 1h
+        <time title={publishedAtFormatted} dateTime={publishedAt.toISOString()}>
+          {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={s.post__content}>
-        <p>Fala galeraa 👋</p>
-        <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </p>
-        <p>
-          <a href=""> 👉 jane.design/doctorcare</a>
-        </p>
+        {content.map((line) => {
+          if (line.type === "paragraph") {
+            return <p key={line.content}>{line.content}</p>;
+          } else if (line.type === "link") {
+            return (
+              <p key={line.content}>
+                <a href="#">{line.content}</a>
+              </p>
+            );
+          }
+        })}
+
         <p>
           <a href=""> #novoprojeto </a>
           <a href=""> #nlw</a>
@@ -36,20 +77,33 @@ const Post = () => {
         </p>
       </div>
 
-      <form className={s.comment__form}>
+      <form className={s.comment__form} onSubmit={handleCreateNewComment}>
         <strong>Deixe sue feedback!</strong>
-        <textarea placeholder="Deixe seu comentario" />
+        <textarea
+          placeholder={"Deixe seu comentario"}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          onInvalid={handleCommentInvalid}
+          required
+        />
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button disabled={comment.length === 0} type="submit">
+            Publicar
+          </button>
         </footer>
       </form>
 
       <div className={s.comment__list}>
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map((comment) => {
+          return (
+            <Comment
+              key={comment}
+              content={comment}
+              onDeleteComment={handleDeleteComment}
+            />
+          );
+        })}
       </div>
     </article>
   );
