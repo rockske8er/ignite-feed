@@ -3,7 +3,12 @@ import { useState } from "react";
 import { Avatar } from "../Avatar";
 import s from "./styles.module.css";
 
-const Comment = ({ content, onDeleteComment }) => {
+interface CommentProps {
+  content: string;
+  onDeleteComment: (comment: string) => void;
+}
+
+const Comment = ({ content, onDeleteComment }: CommentProps) => {
   const [like, setLike] = useState(0);
 
   const handleRemoveComment = () => {
@@ -11,7 +16,9 @@ const Comment = ({ content, onDeleteComment }) => {
   };
 
   const handleLiked = () => {
-    setLike(like + 1);
+    setLike((state) => {
+      return state + 1;
+    });
   };
 
   return (

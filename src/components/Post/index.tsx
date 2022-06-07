@@ -1,14 +1,32 @@
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 import { Avatar } from "../Avatar";
-import { Comment } from "./../Comment";
+import { Comment } from "../Comment";
 import s from "./styles.module.css";
 
-const Post = ({ author, publishedAt, content }) => {
-  const [comments, setComments] = useState([]);
+type AuthorProps = {
+  name: string;
+  role: string;
+  avatar_url: string;
+};
+
+type ContentProps = {
+  type: "paragraph" | "link";
+  content: string;
+};
+
+interface PostProps {
+  author: AuthorProps;
+  publishedAt: Date;
+  content: ContentProps[];
+}
+
+const Post = ({ author, publishedAt, content }: PostProps) => {
+  const [comments, setComments] = useState(["Mui Bem"]);
 
   const [comment, setComment] = useState("");
+
   const publishedAtFormatted = format(
     publishedAt,
     "dd 'de' LLLL 'ás' HH:mm'h'",
@@ -22,13 +40,13 @@ const Post = ({ author, publishedAt, content }) => {
     addSuffix: true,
   });
 
-  const handleCreateNewComment = () => {
+  const handleCreateNewComment = (event: FormEvent) => {
     event.preventDefault();
     setComments([...comments, comment]);
     setComment("");
   };
 
-  const handleDeleteComment = (commentToDelete) => {
+  const handleDeleteComment = (commentToDelete: string) => {
     const commentsWithouToDeleteOne = comments.filter((comment) => {
       return comment !== commentToDelete;
     });
@@ -36,7 +54,7 @@ const Post = ({ author, publishedAt, content }) => {
     setComments(commentsWithouToDeleteOne);
   };
 
-  const handleCommentInvalid = () => {
+  const handleCommentInvalid = (event: InvalidEvent<HTMLTextAreaElement>) => {
     event.target.setCustomValidity("Esse campo e obrigátorio");
   };
 
@@ -73,7 +91,7 @@ const Post = ({ author, publishedAt, content }) => {
         <p>
           <a href=""> #novoprojeto </a>
           <a href=""> #nlw</a>
-          <a href=""> #rocketseat </a>
+          <a href=""> #rocketseat</a>
         </p>
       </div>
 
